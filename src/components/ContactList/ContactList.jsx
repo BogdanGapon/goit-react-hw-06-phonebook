@@ -1,15 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { ContactItem } from './ContactList.styled.js';
 import { deleteContact } from 'redux/contactSlice.js';
+import PropTypes from 'prop-types';
 
 export const ContactList = () => {
-  //   const filter = useSelector(state => state.filter);
-  const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filter);
+  const contacts = useSelector(state => state.contacts.contacts);
+
   const dispatch = useDispatch();
+  const createMarkupByFoundContacts = () => {
+    return contacts.filter(contact => {
+      return contact.name.toLowerCase().includes(filter.toLowerCase());
+    });
+  };
 
   return (
     <ul>
-      {contacts.map(contact => {
+      {createMarkupByFoundContacts()?.map(contact => {
+        console.log(contact);
         return (
           <ContactItem key={contact.id}>
             {contact.name}: {contact.number}
@@ -26,4 +34,9 @@ export const ContactList = () => {
       })}
     </ul>
   );
+};
+
+ContactList.propTypes = {
+  filter: PropTypes.string,
+  contacts: PropTypes.array,
 };

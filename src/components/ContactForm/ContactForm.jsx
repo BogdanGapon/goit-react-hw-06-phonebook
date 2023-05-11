@@ -3,10 +3,11 @@ import { nanoid } from 'nanoid';
 import { Form, LabelInput, Button } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactSlice';
+import PropTypes from 'prop-types';
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.contacts);
   const NameInputId = nanoid();
   const NumberInputId = nanoid();
   const dispatch = useDispatch();
@@ -70,4 +71,10 @@ export const ContactForm = () => {
       </Form>
     </>
   );
+};
+
+ContactForm.propTypes = {
+  name: PropTypes.string,
+  number: PropTypes.string,
+  contacts: PropTypes.array,
 };
