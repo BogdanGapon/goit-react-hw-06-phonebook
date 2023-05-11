@@ -8,6 +8,7 @@ export const ContactList = () => {
   const contacts = useSelector(state => state.contacts.contacts);
 
   const dispatch = useDispatch();
+
   const createMarkupByFoundContacts = () => {
     return contacts.filter(contact => {
       return contact.name.toLowerCase().includes(filter.toLowerCase());
@@ -16,8 +17,7 @@ export const ContactList = () => {
 
   return (
     <ul>
-      {createMarkupByFoundContacts()?.map(contact => {
-        console.log(contact);
+      {createMarkupByFoundContacts().map(contact => {
         return (
           <ContactItem key={contact.id}>
             {contact.name}: {contact.number}

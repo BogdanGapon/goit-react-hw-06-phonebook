@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactSlice';
 import PropTypes from 'prop-types';
 export const ContactForm = () => {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const contacts = useSelector(state => state.contacts.contacts);
   const NameInputId = nanoid();
   const NumberInputId = nanoid();
-  const dispatch = useDispatch();
 
   const handleInputChange = evt => {
     const { name, value } = evt.currentTarget;
